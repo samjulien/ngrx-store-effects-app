@@ -6,13 +6,13 @@ import * as fromStore from '../../store';
 import { Pizza } from '../../models/pizza.model';
 
 @Component({
-    selector: 'products',
-    styleUrls: ['products.component.scss'],
-    template: `
+  selector: 'products',
+  styleUrls: ['products.component.scss'],
+  template: `
     <div class="products">
       <div class="products__new">
         <a
-          class="btn btn__ok" 
+          class="btn btn__ok"
           routerLink="./new">
           New Pizza
         </a>
@@ -30,12 +30,13 @@ import { Pizza } from '../../models/pizza.model';
   `
 })
 export class ProductsComponent implements OnInit {
-    pizzas$: Observable<Pizza[]>;
+  pizzas$: Observable<Pizza[]>;
 
-    constructor(private store: Store<fromStore.ProductsState>) {}
+  constructor(private store: Store<fromStore.ProductsState>) {}
 
-    ngOnInit() {
-        this.pizzas$ = this.store.select(fromStore.getAllPizzas);
-        this.store.dispatch(new fromStore.LoadPizzas());
-    }
+  ngOnInit() {
+    this.pizzas$ = this.store.select(fromStore.getAllPizzas);
+    this.store.dispatch(new fromStore.LoadPizzas());
+    this.store.dispatch(new fromStore.LoadToppings());
+  }
 }
